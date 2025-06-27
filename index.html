@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure File Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #000;
+        }
+        input, button {
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Download File</h1>
+        <p>Please enter the password to download the file.</p>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // Define the correct password (replace with your chosen password)
+        const correctPassword = "enjoythemeal";
+
+        function checkPassword() {
+            const passwordInput = document.getElementById("passwordInput").value;
+            const message = document.getElementById("message");
+
+            if (passwordInput === correctPassword) {
+                message.textContent = "Password correct. Starting download...";
+                setTimeout(() => {
+                    const link = document.createElement('a');
+                    link.href = 'https://mega.nz/file/2clhgBYb#B1oicIIuPet6RivX1cvzAOAGkYd2xAxdsT_-nOpQ-Wk'; // Replace with your file URL
+                    link.download = 'IMS Cookbook'; // Suggested filename
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    message.textContent = "Download should start. If not, click the link below.";
+                }, 1000); // Delay to show success message
+            } else {
+                message.textContent = "Incorrect password. Please try again.";
+            }
+        }
+
+        // Fallback manual link (optional)
+        document.getElementById("message").innerHTML += '<br><a href="https://mega.nz/file/2clhgBYb#B1oicIIuPet6RivX1cvzAOAGkYd2xAxdsT_-nOpQ-Wk" download="IMS Cookbook">Click here to download manually</a>';
+    </script>
+</body>
+</html>
